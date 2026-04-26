@@ -195,18 +195,6 @@ SpoolInv/
 
 ---
 
-## 🤝 Mitmachen
-
-Pull Requests sind willkommen! Bei größeren Änderungen bitte zuerst ein Issue öffnen, um das Vorhaben zu besprechen.
-
-1. Repository forken
-2. Feature-Branch erstellen: `git checkout -b feature/mein-feature`
-3. Änderungen committen: `git commit -m 'Feature hinzufügen'`
-4. Branch pushen: `git push origin feature/mein-feature`
-5. Pull Request öffnen
-
----
-
 ## 📄 Lizenz
 
 [MIT](LICENSE) — Copyright © 2026 Niklas Preis
