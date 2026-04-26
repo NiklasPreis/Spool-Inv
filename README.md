@@ -1,90 +1,94 @@
 # 🧵 SpoolInv
 
-**3D-Druck Filament Inventarverwaltung** — A self-hosted web application for managing your 3D printing filament collection.
+**3D-Druck Filament Inventarverwaltung** — Eine selbst gehostete Webanwendung zur Verwaltung deiner 3D-Druck Filamentsammlung.
 
 ![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4.19-000000?logo=express&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-D97757?logo=anthropic&logoColor=white)
+![Lizenz](https://img.shields.io/badge/Lizenz-MIT-green)
+![Erstellt mit Claude Code](https://img.shields.io/badge/Erstellt%20mit-Claude%20Code-D97757?logo=anthropic&logoColor=white)
 
 ---
 
-## ✨ Features
+## ✨ Funktionen
 
-- **Full CRUD** — Add, edit, and delete filament spools
-- **Smart Filtering** — Filter by material, manufacturer, or storage location in real time
-- **Full-Text Search** — Instantly search across all spool properties
-- **Statistics Dashboard** — Overview of your collection by material, brand, and location
-- **13 Material Types** — PLA, PLA+, ABS, ASA, PETG, TPU, FLEX, Nylon, PC, HIPS, PVA, CF-PLA, and more
-- **Temperature Presets** — Auto-filled nozzle & bed temperature ranges per material
-- **Persistent Storage** — Data is stored in a simple JSON file, easily backed up
-- **Dark UI** — Clean, responsive dark-themed interface
-- **Docker-Ready** — One command to deploy, data survives container restarts
+- **Vollständiges CRUD** — Filamentspulen hinzufügen, bearbeiten und löschen
+- **Echtzeit-Filterung** — Nach Material, Hersteller oder Lagerort filtern
+- **Volltextsuche** — Sofortige Suche über alle Spuleneigenschaften
+- **Statistik-Dashboard** — Übersicht deiner Sammlung nach Material, Marke und Lagerort
+- **13 Materialtypen** — PLA, PLA+, ABS, ASA, PETG, TPU, FLEX, Nylon, PC, HIPS, PVA, CF-PLA und mehr
+- **Temperatur-Voreinstellungen** — Automatisch befüllte Düsen- & Druckbett-Temperaturen je Material
+- **Persistente Datenspeicherung** — Daten werden in einer einfachen JSON-Datei gespeichert, leicht zu sichern
+- **Dunkles Design** — Übersichtliche, responsive Benutzeroberfläche im Dark Theme
+- **Docker-Ready** — Ein Befehl zum Deployen, Daten überleben Container-Neustarts
 
 ---
 
 ## 📸 Screenshots
 
-> *Coming soon — feel free to open a PR with screenshots!*
+### Übersicht
+![Übersicht](Overview.png)
+
+### Spule hinzufügen
+![Spule hinzufügen](Settings.png)
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Schnellstart
 
-### Docker (Recommended)
+### Docker (Empfohlen)
 
 ```bash
 docker compose up -d
 ```
 
-That's it. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Fertig. Öffne [http://localhost:3000](http://localhost:3000) im Browser.
 
-Data is persisted in a named Docker volume (`spoolinv-data`) and survives container restarts and updates.
+Die Daten werden in einem benannten Docker Volume (`spoolinv-data`) gespeichert und überleben Container-Neustarts sowie Updates.
 
 ---
 
-### Local Development
+### Lokale Entwicklung
 
-**Prerequisites:** Node.js 20+
+**Voraussetzungen:** Node.js 20+
 
 ```bash
-# Install dependencies
+# Abhängigkeiten installieren
 npm install
 
-# Start in development mode (hot-reload for both frontend and backend)
+# Entwicklungsmodus starten (Hot-Reload für Frontend und Backend)
 npm run dev
 ```
 
-- React frontend: [http://localhost:5173](http://localhost:5173)
+- React Frontend: [http://localhost:5173](http://localhost:5173)
 - Express API: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-### Production Build (without Docker)
+### Produktions-Build (ohne Docker)
 
 ```bash
 npm run build
 npm start
 ```
 
-Server listens on port `3000` by default.
+Der Server läuft standardmäßig auf Port `3000`.
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ Konfiguration
 
-All configuration is done via environment variables:
+Alle Einstellungen werden über Umgebungsvariablen vorgenommen:
 
-| Variable   | Default  | Description                          |
-|------------|----------|--------------------------------------|
-| `PORT`     | `3000`   | Port the Express server listens on   |
-| `DATA_DIR` | `./data` | Directory where `spoolinv.json` lives |
-| `NODE_ENV` | —        | Set to `production` for optimized build |
+| Variable   | Standard | Beschreibung                                   |
+|------------|----------|------------------------------------------------|
+| `PORT`     | `3000`   | Port, auf dem der Express-Server läuft         |
+| `DATA_DIR` | `./data` | Verzeichnis, in dem `spoolinv.json` gespeichert wird |
+| `NODE_ENV` | —        | Auf `production` setzen für optimierten Build  |
 
-### Custom Port Example
+### Beispiel: Eigener Port
 
 ```yaml
 # docker-compose.yml
@@ -92,7 +96,7 @@ services:
   spoolinv:
     build: .
     ports:
-      - "8080:3000"        # Expose on host port 8080
+      - "8080:3000"        # Extern auf Port 8080 erreichbar
     environment:
       - PORT=3000
     volumes:
@@ -105,13 +109,13 @@ volumes:
 
 ---
 
-## 🗄️ Data Storage
+## 🗄️ Datenspeicherung
 
-SpoolInv uses a single JSON file (`spoolinv.json`) — no database setup required.
+SpoolInv verwendet eine einzelne JSON-Datei (`spoolinv.json`) — kein Datenbank-Setup erforderlich.
 
-**Docker volume location (inside container):** `/data/spoolinv.json`
+**Speicherort im Docker-Container:** `/data/spoolinv.json`
 
-To back up your data:
+Datensicherung erstellen:
 ```bash
 docker run --rm -v spoolinv-data:/data -v $(pwd):/backup alpine \
   cp /data/spoolinv.json /backup/spoolinv-backup.json
@@ -119,30 +123,30 @@ docker run --rm -v spoolinv-data:/data -v $(pwd):/backup alpine \
 
 ---
 
-## 🧱 Tech Stack
+## 🧱 Tech-Stack
 
-| Layer     | Technology                        |
-|-----------|-----------------------------------|
-| Frontend  | React 18, TypeScript, Vite        |
-| Backend   | Node.js 20, Express 4, TypeScript |
-| Storage   | JSON file (no external DB)        |
-| Container | Docker, multi-stage build         |
+| Schicht    | Technologie                       |
+|------------|-----------------------------------|
+| Frontend   | React 18, TypeScript, Vite        |
+| Backend    | Node.js 20, Express 4, TypeScript |
+| Datenbank  | JSON-Datei (keine externe DB)     |
+| Container  | Docker, Multi-Stage-Build         |
 
 ---
 
-## 📡 API Reference
+## 📡 API-Referenz
 
-All endpoints are prefixed with `/api`.
+Alle Endpunkte haben das Präfix `/api`.
 
-| Method   | Endpoint            | Description             |
-|----------|---------------------|-------------------------|
-| `GET`    | `/api/spools`       | List all spools         |
-| `GET`    | `/api/spools/stats` | Get collection stats    |
-| `POST`   | `/api/spools`       | Create a new spool      |
-| `PUT`    | `/api/spools/:id`   | Update an existing spool|
-| `DELETE` | `/api/spools/:id`   | Delete a spool          |
+| Methode  | Endpunkt            | Beschreibung                  |
+|----------|---------------------|-------------------------------|
+| `GET`    | `/api/spools`       | Alle Spulen abrufen           |
+| `GET`    | `/api/spools/stats` | Sammlungsstatistik abrufen    |
+| `POST`   | `/api/spools`       | Neue Spule anlegen            |
+| `PUT`    | `/api/spools/:id`   | Bestehende Spule aktualisieren|
+| `DELETE` | `/api/spools/:id`   | Spule löschen                 |
 
-### Spool Object
+### Spulen-Objekt
 
 ```json
 {
@@ -166,24 +170,24 @@ All endpoints are prefixed with `/api`.
 
 ---
 
-## 📁 Project Structure
+## 📁 Projektstruktur
 
 ```
 SpoolInv/
 ├── src/
-│   ├── server/              # Express backend
-│   │   ├── index.ts         # API routes
-│   │   └── database.ts      # JSON file persistence
-│   └── renderer/            # React frontend
+│   ├── server/              # Express-Backend
+│   │   ├── index.ts         # API-Routen
+│   │   └── database.ts      # JSON-Dateipersistenz
+│   └── renderer/            # React-Frontend
 │       └── src/
-│           ├── App.tsx       # Main view (grid, sidebar, filters)
-│           ├── App.css       # All styles
-│           ├── api.ts        # Fetch client
+│           ├── App.tsx       # Hauptansicht (Raster, Sidebar, Filter)
+│           ├── App.css       # Alle Styles
+│           ├── api.ts        # Fetch-Client
 │           ├── components/
-│           │   ├── SpoolCard.tsx    # Individual spool card
-│           │   └── SpoolModal.tsx   # Add / edit form
+│           │   ├── SpoolCard.tsx    # Einzelne Spulenkarte
+│           │   └── SpoolModal.tsx   # Hinzufügen-/Bearbeiten-Formular
 │           └── types/
-│               └── filament.ts      # Interfaces & material constants
+│               └── filament.ts      # Interfaces & Materialkonstanten
 ├── Dockerfile
 ├── docker-compose.yml
 └── package.json
@@ -191,24 +195,24 @@ SpoolInv/
 
 ---
 
-## 🤝 Contributing
+## 🤝 Mitmachen
 
-Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
+Pull Requests sind willkommen! Bei größeren Änderungen bitte zuerst ein Issue öffnen, um das Vorhaben zu besprechen.
 
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/my-feature`
-3. Commit your changes: `git commit -m 'Add my feature'`
-4. Push to the branch: `git push origin feature/my-feature`
-5. Open a Pull Request
+1. Repository forken
+2. Feature-Branch erstellen: `git checkout -b feature/mein-feature`
+3. Änderungen committen: `git commit -m 'Feature hinzufügen'`
+4. Branch pushen: `git push origin feature/mein-feature`
+5. Pull Request öffnen
 
 ---
 
-## 📄 License
+## 📄 Lizenz
 
 [MIT](LICENSE) — Copyright © 2026 Niklas Preis
 
 ---
 
-## 🤖 Built with Claude Code
+## 🤖 Erstellt mit Claude Code
 
-This project was built with the help of [Claude Code](https://claude.ai/code), Anthropic's AI-powered coding assistant.
+Dieses Projekt wurde mit Unterstützung von [Claude Code](https://claude.ai/code), dem KI-gestützten Programmierassistenten von Anthropic, erstellt.
